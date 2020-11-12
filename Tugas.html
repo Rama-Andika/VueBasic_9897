@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1.0" />
+        <link rel="stylesheet" href="stylee.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Tugas</title>
+        <script src="vue.js"></script>
+</head>
+
+<body style="background-color: dimgrey;">
+    <div id="app">
+
+    
+
+        <div class="col-5 justify-content-center mx-auto mt-5">
+            <div class="card p-5">
+
+                <div class="form-group">
+                    <label for="title"><strong>Task</strong></label>
+                    <input type="text"  class="form-control" id="title" >
+                </div>
+
+                <div class="form-group">
+                    <label for="prioritas"><strong>Prioritas</strong> </label>
+                    <select name="prioritas"  id="prioritas" class="form-control">
+                        <option value="Penting">Penting</option>
+                        <option value="Biasa">Biasa aja</option>
+                        <option value="Tidak Penting">Tidak penting</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="catatan"><strong>Catatan</strong> </label>
+                    <textarea class="form-control" id="catatan"></textarea>
+                </div>
+
+                <br><br>
+                <div>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="simpanTask">Simpan</button>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block"  @click="resetTask">Reset</button>
+                   
+                </div>
+
+                
+                <div class="card">
+                    <div v-for="(tasks,index) in task" :key="index">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#0bf3ef;">
+                                <span class="float-right"><button class="btn btn-sm" @click="deleteTask(index)" style="color: crimson;">X</button></span>
+
+                                <span v-if="tasks.prioritas == 'penting'" class="badge badge-light text-danger" style="width: 20rem; margin-left: 75px;">{{ tasks.prioritas }}</span>
+                                <span v-else-if="tasks.prioritas == 'biasa'" class="badge badge-light text-warning" style="width: 20rem; margin-left: 75px;">{{ tasks.prioritas }}</span>
+                                <span v-else class="badge badge-light text-success" style="width: 20rem; margin-left: 75px;">{{ tasks.prioritas }}</span>
+                                
+                                <br><br>
+                                <h4>{{ tasks.title }}</h4>
+                                <h5>{{ tasks.catatan }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-5" style="margin-bottom: 20px; color: floralwhite;" >
+            {{ `${mahasiswa.nama} | ${mahasiswa.npm} | ${mahasiswa.kelas}` }}
+            
+        </footer>
+
+    </div>
+</body>
+
+<script>
+   new Vue({
+        el: "#app",
+        data: {
+            task:[],
+            mahasiswa: {
+                nama:'I Putu Rama Andika Putra',
+                npm:'180709897',
+                kelas: 'A',
+            },
+            
+        },
+        methods: {
+            simpanTask() {
+                
+                let tasks = {
+                    title : title.value,
+                    prioritas : prioritas.value,
+                    catatan : catatan.value,
+                }
+                
+                catatan.value = "";
+                prioritas.value = "";
+                title.value = "";
+                
+                this.task.push(tasks);
+                
+            },
+
+            resetTask(){
+                catatan.value = "";
+                prioritas.value = "";
+                title.value = "";
+            },
+
+            deleteTask(index){
+                this.task.splice(index,1);
+            },
+
+            clearAll() {
+                this.task = [];
+            }
+        },
+    });
+</script>
+</html>

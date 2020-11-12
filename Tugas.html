@@ -20,8 +20,8 @@
             <div class="card p-5">
 
                 <div class="form-group">
-                    <label for="title"><strong>Task</strong></label>
-                    <input type="text"  class="form-control" id="title" >
+                    <label for="toDo"><strong>Task</strong></label>
+                    <input type="text"  class="form-control" id="toDo" >
                 </div>
 
                 <div class="form-group">
@@ -57,7 +57,7 @@
                                 <span v-else class="badge badge-light text-success" style="width: 20rem; margin-left: 75px;">{{ tasks.prioritas }}</span>
                                 
                                 <br><br>
-                                <h4>{{ tasks.title }}</h4>
+                                <h4>{{ tasks.toDo }}</h4>
                                 <h5>{{ tasks.catatan }}</h5>
                             </div>
                         </div>
@@ -90,14 +90,14 @@
             simpanTask() {
                 
                 let tasks = {
-                    title : title.value,
+                    toDo : toDo.value,
                     prioritas : prioritas.value,
                     catatan : catatan.value,
                 }
                 
                 catatan.value = "";
                 prioritas.value = "";
-                title.value = "";
+                toDo.value = "";
                 
                 this.task.push(tasks);
                 
@@ -106,7 +106,7 @@
             resetTask(){
                 catatan.value = "";
                 prioritas.value = "";
-                title.value = "";
+                toDo.value = "";
             },
 
             deleteTask(index){
